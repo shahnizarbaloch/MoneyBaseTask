@@ -1,4 +1,4 @@
-package com.shah.moneybasetask.ui.theme
+package com.shah.moneybasetask.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

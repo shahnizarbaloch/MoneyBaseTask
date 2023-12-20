@@ -1,4 +1,4 @@
-package com.shah.moneybasetask
+package com.shah.moneybasetask.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.shah.moneybasetask.ui.theme.MoneyBaseTaskTheme
+import com.shah.moneybasetask.presentation.ui.theme.MoneyBaseTaskTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
