@@ -1,6 +1,7 @@
 package com.shah.moneybasetask
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class MoneyBaseApplication : Application() {
-}
+@HiltAndroidApp
+class MoneyBaseApplication : Application()
