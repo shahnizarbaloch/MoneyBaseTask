@@ -7,8 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.shah.moneybasetask.common.Resource
 import com.shah.moneybasetask.domain.use_cases.get_stocks.GetStockUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,8 +19,17 @@ class StockListViewModel @Inject constructor(private val getStockUseCase: GetSto
     private val _state = mutableStateOf(StockListState())
     val state:State<StockListState> = _state
 
+    private val _search = mutableStateOf("")
+    val search = _search
+
     init {
-        getStocks()
+        viewModelScope.launch {
+            //while (true) {
+                getStocks()
+                //delay(8000)
+           // }
+        }
+
     }
 
     private fun getStocks() {

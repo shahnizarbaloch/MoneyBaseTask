@@ -99,7 +99,7 @@ fun StockListItem(
                     }
 
                     Image(
-                        painter = imagePainter,
+                        painter =imagePainter,
                         contentDescription = "",
                         modifier = Modifier.size(24.dp)
                     )
