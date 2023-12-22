@@ -84,7 +84,7 @@ fun StockListItem(
                 horizontalAlignment = Alignment.End
             ) {
                 Text(
-                    text = stock.price,
+                    text = "$${stock.price}",
                     style = MaterialTheme.typography.titleLarge,
                     maxLines = 1,
                     fontWeight = FontWeight.Bold,

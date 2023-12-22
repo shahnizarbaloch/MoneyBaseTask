@@ -1,7 +1,8 @@
 package com.shah.moneybasetask.presentation.main_screen
 
 
-import android.util.Log
+import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,10 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,16 +24,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.shah.moneybasetask.R
+import com.shah.moneybasetask.domain.model.StockCustomModelParcelable
+import com.shah.moneybasetask.presentation.detail_screen.StockDetailsActivity
 import com.shah.moneybasetask.presentation.main_screen.components.StockListItem
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun StockListScreen(viewModel: StockListViewModel = hiltViewModel()) {
+fun StockListScreen(context: Activity,
+    viewModel: StockListViewModel = hiltViewModel()) {
 
     val state = viewModel.state.value
 
@@ -92,14 +91,19 @@ fun StockListScreen(viewModel: StockListViewModel = hiltViewModel()) {
                 )
             }
 
-
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ) {
                 items(viewModel.filteredStocks.value) { stock ->
                     StockListItem(stock = stock,
                         onItemClick = {
+                            //Open stock details activity here
+                            val obj = StockCustomModelParcelable(stock.symbol,stock.name,stock.price,stock.priceChange,stock.upOrDown)
 
+                            val intent = Intent(context, StockDetailsActivity::class.java).apply {
+                                putExtra("EXTRA_STOCK", obj)
+                            }
+                            context.startActivity(intent)
                         })
                 }
             }

@@ -6,4 +6,6 @@ data class StockCustomModel(
     val price:String,
     val priceChange:String,
     val upOrDown:String,
-    val spark: Spark)
+    val spark: Spark){
+
+}
