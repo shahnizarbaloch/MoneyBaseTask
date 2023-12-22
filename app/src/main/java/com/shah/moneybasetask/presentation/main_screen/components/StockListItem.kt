@@ -25,7 +25,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.shah.moneybasetask.R
-import com.shah.moneybasetask.domain.model.Result
 import com.shah.moneybasetask.domain.model.StockCustomModel
 
 
@@ -109,7 +108,7 @@ fun StockListItem(
                             .clip(RoundedCornerShape(4.dp))
                             .background(Color.White)
                             .padding(horizontal = 4.dp),
-                        text = stock.priceChange.toString(),
+                        text = stock.priceChange,
                         style = MaterialTheme.typography.titleMedium,
                         maxLines = 1,
                         fontWeight = FontWeight.Light,

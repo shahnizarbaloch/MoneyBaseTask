@@ -1,26 +1,40 @@
 package com.shah.moneybasetask.presentation.main_screen
 
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shah.moneybasetask.common.Resource
+import com.shah.moneybasetask.domain.model.StockCustomModel
 import com.shah.moneybasetask.domain.use_cases.get_stocks.GetStockUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@OptIn(FlowPreview::class)
 @HiltViewModel
 class StockListViewModel @Inject constructor(private val getStockUseCase: GetStockUseCase) : ViewModel(){
 
     private val _state = mutableStateOf(StockListState())
     val state:State<StockListState> = _state
 
-    private val _search = mutableStateOf("")
-    val search = _search
+    private val _filteredStocks = MutableStateFlow<List<StockCustomModel>>(emptyList())
+    val filteredStocks: StateFlow<List<StockCustomModel>> get() = _filteredStocks
+
+    var search by mutableStateOf("")
+        private set
+    fun updateSearchText(input:String){
+        search = input
+        filterStocks()
+    }
+
 
     init {
         viewModelScope.launch {
@@ -37,6 +51,7 @@ class StockListViewModel @Inject constructor(private val getStockUseCase: GetSto
             when (result) {
                 is Resource.Success -> {
                     _state.value = StockListState(stocks = result.data ?: emptyList())
+                    _filteredStocks.value = _state.value.stocks
                 }
                 is Resource.Error -> {
                     _state.value = StockListState(
@@ -53,5 +68,17 @@ class StockListViewModel @Inject constructor(private val getStockUseCase: GetSto
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    private fun filterStocks() {
+        val filteredList = if (search.isBlank()) {
+            state.value.stocks // Return all stocks if search query is empty
+        } else {
+            state.value.stocks.filter { stock ->
+                stock.symbol.contains(search, ignoreCase = true) ||
+                        stock.name.contains(search, ignoreCase = true)
+            }
+        }
+        _filteredStocks.value = filteredList
     }
 }
