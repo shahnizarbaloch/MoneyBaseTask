@@ -1,7 +1,6 @@
-package com.shah.moneybasetask.domain.model
+package com.shah.moneybasetask.domain.model.market_summary
 
 import com.shah.moneybasetask.common.Utils
-import com.shah.moneybasetask.domain.model.Result
 
 data class Result(
     val cryptoTradeable: Boolean=false,
@@ -29,7 +28,7 @@ data class Result(
     val triggerable: Boolean=false
 )
 
-fun Result.toExpectedResult(): StockCustomModel{
+fun Result.toExpectedResult(): StockCustomModel {
     return StockCustomModel(
         symbol = symbol,
         name = fullExchangeName,

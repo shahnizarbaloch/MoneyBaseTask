@@ -131,4 +131,8 @@ dependencies {
 
     /*testImplementation("org.mockito:mockito-core:3.8.0")
     androidTestImplementation("org.mockito:mockito-android:3.8.0")*/
+
+    //picture
+    implementation("com.github.bumptech.glide:glide:4.14.2")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
 }

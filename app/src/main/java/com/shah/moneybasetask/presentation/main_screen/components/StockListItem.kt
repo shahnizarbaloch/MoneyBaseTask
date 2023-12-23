@@ -25,7 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.shah.moneybasetask.R
-import com.shah.moneybasetask.domain.model.StockCustomModel
+import com.shah.moneybasetask.domain.model.market_summary.StockCustomModel
 
 
 @Composable
@@ -91,14 +91,27 @@ fun StockListItem(
                     overflow = TextOverflow.Ellipsis
                 )
                 Row {
-                    val imagePainter = if (stock.upOrDown == "up") {
-                        painterResource(id = R.drawable.ic_stock_up)
-                    } else {
-                        painterResource(id = R.drawable.ic_stock_down)
+
+                    val imagePainter = when (stock.upOrDown) {
+                        "up" -> {
+                            painterResource(id = R.drawable.ic_stock_up)
+                        }
+                        "down" -> {
+                            painterResource(id = R.drawable.ic_stock_down)
+                        }
+                        else -> {
+                            painterResource(id = R.drawable.ic_stock_not_moved)
+                        }
+                    }
+
+                    val textColor = when (stock.upOrDown) {
+                        "up" -> Color.Green
+                        "down" -> Color.Red
+                        else -> Color.Gray
                     }
 
                     Image(
-                        painter =imagePainter,
+                        painter = imagePainter,
                         contentDescription = "",
                         modifier = Modifier.size(24.dp)
                     )
@@ -112,7 +125,8 @@ fun StockListItem(
                         style = MaterialTheme.typography.titleMedium,
                         maxLines = 1,
                         fontWeight = FontWeight.Light,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        color = textColor
                     )
                 }
 

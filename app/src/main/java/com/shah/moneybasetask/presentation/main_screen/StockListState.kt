@@ -1,6 +1,6 @@
 package com.shah.moneybasetask.presentation.main_screen
 
-import com.shah.moneybasetask.domain.model.StockCustomModel
+import com.shah.moneybasetask.domain.model.market_summary.StockCustomModel
 
 data class StockListState (
     val isLoading: Boolean = false,

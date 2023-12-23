@@ -1,4 +1,4 @@
-package com.shah.moneybasetask.domain.model
+package com.shah.moneybasetask.domain.model.market_summary
 
 import android.os.Parcel
 import android.os.Parcelable

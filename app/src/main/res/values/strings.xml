@@ -5,4 +5,13 @@
     <string name="trades">Trades</string>
     <string name="time">Time</string>
     <string name="price">Price</string>
+    <string name="total_market_cap">Total Market Cap</string>
+    <string name="average_daily_volume">Average Daily Volume</string>
+    <string name="_24_hours_low">24 Hours Low</string>
+    <string name="_24_hours_high">24 Hours High</string>
+    <string name="circulating_supply">Circulating Supply</string>
+    <string name="_10_day_average">10 Day Average Volume</string>
+    <string name="_50_day_average">50 Day Average Price</string>
+    <string name="market_open">Market Open</string>
+    <string name="previous_close">Previous Close</string>
 </resources>

@@ -1,14 +1,13 @@
 package com.shah.moneybasetask.di
 
-import android.content.Context
-import com.shah.moneybasetask.MoneyBaseApplication
 import com.shah.moneybasetask.data.remote.ApiCalls
 import com.shah.moneybasetask.data.repository.MarketSummaryRepositoryImpl
+import com.shah.moneybasetask.data.repository.StockSummaryRepositoryImpl
 import com.shah.moneybasetask.domain.repository.MarketSummaryRepository
+import com.shah.moneybasetask.domain.repository.StockSummaryRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,20 +15,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
-object TestAppModule {
-
-    @Singleton
-    @Provides
-    fun provideApplication(@ApplicationContext app: Context): MoneyBaseApplication {
-        return app as MoneyBaseApplication
-    }
-
+object ApiModule {
     @Provides
     @Singleton
-    fun provideStocksApi():ApiCalls {
+    fun provideStocksApi(): ApiCalls {
 
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -56,7 +47,13 @@ object TestAppModule {
 
     @Provides
     @Singleton
-    fun provideStockRepository(api: ApiCalls):MarketSummaryRepository {
+    fun provideMarketSummaryRepository(api: ApiCalls): MarketSummaryRepository {
         return MarketSummaryRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideStockSummaryRepository(api: ApiCalls): StockSummaryRepository {
+        return StockSummaryRepositoryImpl(api)
     }
 }

@@ -1,4 +1,4 @@
-package com.shah.moneybasetask.domain.model
+package com.shah.moneybasetask.domain.model.market_summary
 
 data class Spark(
     val chartPreviousClose: Double = 0.0,

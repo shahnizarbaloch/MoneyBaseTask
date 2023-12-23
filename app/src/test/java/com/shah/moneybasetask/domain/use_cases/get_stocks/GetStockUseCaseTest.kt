@@ -2,9 +2,10 @@ package com.shah.moneybasetask.domain.use_cases.get_stocks
 
 import com.google.common.truth.Truth.assertThat
 import com.shah.moneybasetask.common.Resource
-import com.shah.moneybasetask.data.repository.FakeStockRepository
-import com.shah.moneybasetask.domain.model.Spark
-import com.shah.moneybasetask.domain.model.StockCustomModel
+import com.shah.moneybasetask.data.repository.FakeMarketSummaryRepository
+import com.shah.moneybasetask.domain.model.market_summary.Spark
+import com.shah.moneybasetask.domain.model.market_summary.StockCustomModel
+import com.shah.moneybasetask.domain.use_cases.feature_market_summary.GetMarketSummaryUseCase
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -12,13 +13,13 @@ import org.junit.Test
 
 class GetStockUseCaseTest{
 
-    private lateinit var getStocks: GetStockUseCase
-    private lateinit var fakeStockRepository: FakeStockRepository
+    private lateinit var getStocks: GetMarketSummaryUseCase
+    private lateinit var fakeStockRepository: FakeMarketSummaryRepository
 
     @Before
     fun setup(){
-        fakeStockRepository = FakeStockRepository()
-        getStocks = GetStockUseCase(fakeStockRepository)
+        fakeStockRepository = FakeMarketSummaryRepository()
+        getStocks = GetMarketSummaryUseCase(fakeStockRepository)
 
         val stocksToInsert = mutableListOf<StockCustomModel>()
         ('a'..'z').forEachIndexed { index, c ->

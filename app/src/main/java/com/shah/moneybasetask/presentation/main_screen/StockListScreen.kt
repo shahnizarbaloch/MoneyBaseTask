@@ -1,7 +1,6 @@
 package com.shah.moneybasetask.presentation.main_screen
 
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.background
@@ -31,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.shah.moneybasetask.R
 import com.shah.moneybasetask.common.TestConstants
-import com.shah.moneybasetask.domain.model.StockCustomModelParcelable
+import com.shah.moneybasetask.domain.model.market_summary.StockCustomModelParcelable
 import com.shah.moneybasetask.presentation.detail_screen.StockDetailsActivity
 import com.shah.moneybasetask.presentation.main_screen.components.StockListItem
 

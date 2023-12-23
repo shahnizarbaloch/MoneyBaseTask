@@ -2,7 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="app">
+      <entry key="StockListScreenTest">
         <State>
           <runningDeviceTargetSelectedWithDropDown>
             <Target>
@@ -15,8 +15,30 @@
               </deviceKey>
             </Target>
           </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2023-12-22T10:39:48.725146200Z" />
+          <timeTargetWasSelectedWithDropDown value="2023-12-22T23:46:37.316659600Z" />
         </State>
+      </entry>
+      <entry key="app">
+        <State />
+      </entry>
+      <entry key="testLazyColumnIsEmpty()">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\shahn\.android\avd\Pixel_6_Pro_API_33.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2023-12-22T23:42:49.295385500Z" />
+        </State>
+      </entry>
+      <entry key="writeSomethingInTheSearchViewToTestIt()">
+        <State />
       </entry>
     </value>
   </component>

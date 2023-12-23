@@ -7,10 +7,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shah.moneybasetask.common.Resource
-import com.shah.moneybasetask.domain.model.StockCustomModel
-import com.shah.moneybasetask.domain.use_cases.get_stocks.GetStockUseCase
+import com.shah.moneybasetask.domain.model.market_summary.StockCustomModel
+import com.shah.moneybasetask.domain.use_cases.feature_market_summary.GetMarketSummaryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -18,9 +17,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@OptIn(FlowPreview::class)
 @HiltViewModel
-class StockListViewModel @Inject constructor(private val getStockUseCase: GetStockUseCase) : ViewModel(){
+class StockListViewModel @Inject constructor(private val useCase: GetMarketSummaryUseCase) : ViewModel(){
 
     private val _state = mutableStateOf(StockListState())
     val state:State<StockListState> = _state
@@ -38,7 +36,7 @@ class StockListViewModel @Inject constructor(private val getStockUseCase: GetSto
 
     init {
         viewModelScope.launch {
-            //while (true) {
+           // while (true) {
                 getStocks()
                 //delay(8000)
            // }
@@ -47,7 +45,7 @@ class StockListViewModel @Inject constructor(private val getStockUseCase: GetSto
     }
 
     private fun getStocks() {
-        getStockUseCase("US").onEach { result ->
+        useCase("US").onEach { result ->
             when (result) {
                 is Resource.Success -> {
                     _state.value = StockListState(stocks = result.data ?: emptyList())

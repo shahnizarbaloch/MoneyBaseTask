@@ -1,4 +1,4 @@
-package com.shah.moneybasetask.domain.model
+package com.shah.moneybasetask.domain.model.market_summary
 
 data class StockCustomModel(
     val symbol:String,
@@ -6,6 +6,7 @@ data class StockCustomModel(
     val price:String,
     val priceChange:String,
     val upOrDown:String,
-    val spark: Spark){
+    val spark: Spark
+){
 
 }
