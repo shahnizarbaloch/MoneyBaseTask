@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
             MoneyBaseTaskTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    StockListScreen(this)
+                    StockListScreen()
                 }
             }
         }

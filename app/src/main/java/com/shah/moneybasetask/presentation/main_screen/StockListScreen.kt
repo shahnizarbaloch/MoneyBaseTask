@@ -2,6 +2,7 @@ package com.shah.moneybasetask.presentation.main_screen
 
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -22,18 +23,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.shah.moneybasetask.R
+import com.shah.moneybasetask.common.TestConstants
 import com.shah.moneybasetask.domain.model.StockCustomModelParcelable
 import com.shah.moneybasetask.presentation.detail_screen.StockDetailsActivity
 import com.shah.moneybasetask.presentation.main_screen.components.StockListItem
 
 @Composable
-fun StockListScreen(context: Activity,
-    viewModel: StockListViewModel = hiltViewModel()) {
+fun StockListScreen(viewModel: StockListViewModel = hiltViewModel()) {
+
+
+    // Access the Context using LocalContext
+    val context: Context = LocalContext.current
 
     val state = viewModel.state.value
 
@@ -53,7 +60,8 @@ fun StockListScreen(context: Activity,
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(20.dp),
+                    .padding(20.dp)
+                    .testTag(TestConstants.SEARCH_BAR),
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
@@ -69,7 +77,8 @@ fun StockListScreen(context: Activity,
                 singleLine = true,
                 placeholder = {
                     Text(text = "Search")
-                })
+                },
+                )
             if (state.error.isNotBlank()) {
                 Text(
                     text = state.error,
@@ -93,6 +102,7 @@ fun StockListScreen(context: Activity,
 
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
+                    .testTag(TestConstants.STOCK_LAZY_COLUMN)
             ) {
                 items(viewModel.filteredStocks.value) { stock ->
                     StockListItem(stock = stock,
