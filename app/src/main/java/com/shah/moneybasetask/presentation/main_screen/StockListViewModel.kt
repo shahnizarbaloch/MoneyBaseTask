@@ -11,6 +11,7 @@ import com.shah.moneybasetask.domain.model.market_summary.Spark
 import com.shah.moneybasetask.domain.model.market_summary.StockCustomModel
 import com.shah.moneybasetask.domain.use_cases.feature_market_summary.GetMarketSummaryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -37,10 +38,10 @@ class StockListViewModel @Inject constructor(private val useCase: GetMarketSumma
 
     init {
         viewModelScope.launch {
-           // while (true) {
+            while (true) {
                 getStocks()
-                //delay(8000)
-           // }
+                delay(8000)
+            }
         }
 
     }
@@ -80,6 +81,8 @@ class StockListViewModel @Inject constructor(private val useCase: GetMarketSumma
         }
         _filteredStocks.value = filteredList
     }
+
+    //Below methods are made just for UI testing. Ignore them
 
     fun showLoadingBarForTestingOnly(){
         _state.value = StockListState(isLoading = true)
