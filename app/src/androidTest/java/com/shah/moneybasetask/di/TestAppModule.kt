@@ -1,14 +1,13 @@
 package com.shah.moneybasetask.di
 
-import android.content.Context
-import com.shah.moneybasetask.MoneyBaseApplication
 import com.shah.moneybasetask.data.remote.ApiCalls
 import com.shah.moneybasetask.data.repository.MarketSummaryRepositoryImpl
 import com.shah.moneybasetask.domain.repository.MarketSummaryRepository
+import com.shah.moneybasetask.domain.use_cases.feature_market_summary.GetMarketSummaryUseCase
+import com.shah.moneybasetask.presentation.main_screen.StockListViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,15 +20,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object TestAppModule {
 
-    @Singleton
-    @Provides
-    fun provideApplication(@ApplicationContext app: Context): MoneyBaseApplication {
-        return app as MoneyBaseApplication
-    }
-
     @Provides
     @Singleton
-    fun provideStocksApi():ApiCalls {
+    fun provideStocksApi(): ApiCalls {
 
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -39,15 +32,15 @@ object TestAppModule {
             .addInterceptor(loggingInterceptor)
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
-                    .addHeader("X-RapidAPI-Key", "e17c2a5d4bmshc17564888f42bcdp1cd6f0jsnedb47f780fcb")
-                    .addHeader("X-RapidAPI-Host", "yh-finance.p.rapidapi.com")
+                    .addHeader("", "")
+                    .addHeader("", "")
                     .build()
                 chain.proceed(request)
             }
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("https://yh-finance.p.rapidapi.com/")
+            .baseUrl("")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -56,7 +49,15 @@ object TestAppModule {
 
     @Provides
     @Singleton
-    fun provideStockRepository(api: ApiCalls):MarketSummaryRepository {
+    fun provideMarketSummaryRepository(api: ApiCalls): MarketSummaryRepository {
         return MarketSummaryRepositoryImpl(api)
     }
+
+    /*@Provides
+    @Singleton
+    fun providesUseCaseMarketSummary(api: ApiCalls) : GetMarketSummaryUseCase{
+        return GetMarketSummaryUseCase(MarketSummaryRepositoryImpl(api))
+    }*/
+
+
 }

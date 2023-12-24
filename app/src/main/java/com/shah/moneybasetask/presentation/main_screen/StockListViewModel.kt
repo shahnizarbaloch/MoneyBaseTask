@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shah.moneybasetask.common.Resource
+import com.shah.moneybasetask.domain.model.market_summary.Spark
 import com.shah.moneybasetask.domain.model.market_summary.StockCustomModel
 import com.shah.moneybasetask.domain.use_cases.feature_market_summary.GetMarketSummaryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -78,5 +79,19 @@ class StockListViewModel @Inject constructor(private val useCase: GetMarketSumma
             }
         }
         _filteredStocks.value = filteredList
+    }
+
+    fun showLoadingBarForTestingOnly(){
+        _state.value = StockListState(isLoading = true)
+    }
+    fun setLazyColumnValuesForTesting(){
+        val stockToAdd = mutableListOf<StockCustomModel>()
+        stockToAdd.add(StockCustomModel("GSPC","SNP","4,746.75","+0.17%","up", Spark()))
+        stockToAdd.add(StockCustomModel("DJI","DJI","37,404.35","-0.05%","down", Spark()))
+        stockToAdd.add(StockCustomModel("IXIC","Nasdaq GIDS","14,963.87","+0.19%","up", Spark()))
+        stockToAdd.add(StockCustomModel("RUT","Chicago Options","2,017.06","+0.84%","up", Spark()))
+        stockToAdd.add(StockCustomModel("BTC-USD","CCC","44,012.20","-0.49%","down", Spark()))
+        _state.value = StockListState(stocks = stockToAdd)
+        _filteredStocks.value = _state.value.stocks
     }
 }

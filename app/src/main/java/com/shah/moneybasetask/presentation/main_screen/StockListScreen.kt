@@ -87,6 +87,7 @@ fun StockListScreen(viewModel: StockListViewModel = hiltViewModel()) {
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp)
                         .align(Alignment.CenterHorizontally)
+                        .testTag(TestConstants.ERROR_MESSAGE)
 
                 )
             }
@@ -96,6 +97,7 @@ fun StockListScreen(viewModel: StockListViewModel = hiltViewModel()) {
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .padding(10.dp)
+                        .testTag(TestConstants.PROGRESS_BAR)
                 )
             }
 
