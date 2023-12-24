@@ -1,6 +1,7 @@
 package com.shah.moneybasetask.domain.model.market_summary
 
 import com.shah.moneybasetask.common.Utils
+import java.util.UUID
 
 data class Result(
     val cryptoTradeable: Boolean=false,
@@ -30,6 +31,7 @@ data class Result(
 
 fun Result.toExpectedResult(): StockCustomModel {
     return StockCustomModel(
+        id = UUID.randomUUID().toString(),
         symbol = symbol,
         name = fullExchangeName,
         price = regularMarketPreviousClose.fmt,

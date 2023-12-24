@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -89,11 +90,11 @@ class StockListViewModel @Inject constructor(private val useCase: GetMarketSumma
     }
     fun setLazyColumnValuesForTesting(){
         val stockToAdd = mutableListOf<StockCustomModel>()
-        stockToAdd.add(StockCustomModel("GSPC","SNP","4,746.75","+0.17%","up", Spark()))
-        stockToAdd.add(StockCustomModel("DJI","DJI","37,404.35","-0.05%","down", Spark()))
-        stockToAdd.add(StockCustomModel("IXIC","Nasdaq GIDS","14,963.87","+0.19%","up", Spark()))
-        stockToAdd.add(StockCustomModel("RUT","Chicago Options","2,017.06","+0.84%","up", Spark()))
-        stockToAdd.add(StockCustomModel("BTC-USD","CCC","44,012.20","-0.49%","down", Spark()))
+        stockToAdd.add(StockCustomModel(UUID.randomUUID().toString(),"GSPC","SNP","4,746.75","+0.17%","up", Spark()))
+        stockToAdd.add(StockCustomModel(UUID.randomUUID().toString(),"DJI","DJI","37,404.35","-0.05%","down", Spark()))
+        stockToAdd.add(StockCustomModel(UUID.randomUUID().toString(),"IXIC","Nasdaq GIDS","14,963.87","+0.19%","up", Spark()))
+        stockToAdd.add(StockCustomModel(UUID.randomUUID().toString(),"RUT","Chicago Options","2,017.06","+0.84%","up", Spark()))
+        stockToAdd.add(StockCustomModel(UUID.randomUUID().toString(),"BTC-USD","CCC","44,012.20","-0.49%","down", Spark()))
         _state.value = StockListState(stocks = stockToAdd)
         _filteredStocks.value = _state.value.stocks
     }

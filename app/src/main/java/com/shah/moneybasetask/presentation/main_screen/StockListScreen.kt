@@ -105,7 +105,10 @@ fun StockListScreen(viewModel: StockListViewModel = hiltViewModel()) {
                 modifier = Modifier.fillMaxSize()
                     .testTag(TestConstants.STOCK_LAZY_COLUMN)
             ) {
-                items(viewModel.filteredStocks.value) { stock ->
+                items(items = viewModel.filteredStocks.value,
+                    key = {
+                        it.id
+                    }) { stock ->
                     StockListItem(stock = stock,
                         onItemClick = {
                             //Open stock details activity here
